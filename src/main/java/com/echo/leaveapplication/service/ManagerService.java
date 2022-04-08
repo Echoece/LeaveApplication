@@ -2,10 +2,11 @@ package com.echo.leaveapplication.service;
 
 
 import com.echo.leaveapplication.entity.ApplicationForLeave;
-import com.echo.leaveapplication.repo.ApplicationForLeaveRepo;
 import com.echo.leaveapplication.entity.Status;
+import com.echo.leaveapplication.entity.dto.AddRemarkDTO;
 import com.echo.leaveapplication.entity.dto.LeaveBalanceDTO;
 import com.echo.leaveapplication.entity.rowmapper.LeaveBalanceRowMapper;
+import com.echo.leaveapplication.repo.ApplicationForLeaveRepo;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
@@ -78,8 +79,23 @@ public class ManagerService {
 
         SqlParameterSource sqlParameterSource = new MapSqlParameterSource()
                 .addValue("id",userId)
-                .addValue("status",Status.APPROVED);
+                .addValue("status",Status.APPROVED.name());
 
         return template.query(query, sqlParameterSource, leaveBalanceRowMapper);
+    }
+
+    public void addRemark(AddRemarkDTO addRemarkDTO) {
+        Optional<ApplicationForLeave> application = applicationForLeaveRepo.findById(addRemarkDTO.getId());
+
+        if(application.isPresent()){
+            String query = "UPDATE application_for_leave "
+                    + "SET remark =:remark "
+                    + "WHERE id = :id";
+            SqlParameterSource sqlParameterSource = new MapSqlParameterSource()
+                    .addValue("remark",addRemarkDTO.getRemark())
+                    .addValue("id",addRemarkDTO.getId());
+
+            template.update(query,sqlParameterSource);
+        }
     }
 }

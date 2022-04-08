@@ -1,16 +1,13 @@
 package com.echo.leaveapplication.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.sql.Date;
 
-@Data @AllArgsConstructor @NoArgsConstructor
+@NoArgsConstructor @Getter @Setter @AllArgsConstructor
 @Entity
 @Builder
 public class ApplicationForLeave {

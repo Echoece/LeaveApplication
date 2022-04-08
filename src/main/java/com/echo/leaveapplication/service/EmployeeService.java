@@ -84,7 +84,7 @@ public class EmployeeService {
 
         SqlParameterSource sqlParameterSource = new MapSqlParameterSource()
                 .addValue("id",userId)
-                .addValue("status",Status.APPROVED);
+                .addValue("status",Status.APPROVED.name());
 
         return template.query(query, sqlParameterSource, leaveBalanceRowMapper);
     }

@@ -7,7 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-@Getter @Setter @NoArgsConstructor @AllArgsConstructor @Builder
+@NoArgsConstructor @Getter @Setter @Builder @AllArgsConstructor
 @Entity
 public class LeaveType {
     @Id
